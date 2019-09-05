@@ -1954,21 +1954,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DonationType',
   data: function data() {
     return {
-      donationTypePicked: '',
-      donationAmount: '1',
-      donationValues: [{
+      donationTypePicked: 'one-off',
+      donationAmountSingle: '1',
+      donationValuesSingle: [{
         value: 1
       }, {
-        value: 5
+        value: 2
       }, {
         value: 10
-      }]
+      }],
+      emailAddress: null,
+      fullName: null,
+      paymentTypePicked: '',
+      errors: []
     };
-  }
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -37304,6 +37351,224 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "btn-group btn-group-toggle" }, [
+      _c(
+        "label",
+        {
+          staticClass: "btn btn-secondary",
+          class: { active: _vm.donationTypePicked === "one-off" },
+          attrs: { for: "donationType-one-off" }
+        },
+        [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.donationTypePicked,
+                expression: "donationTypePicked"
+              }
+            ],
+            attrs: {
+              id: "donationType-one-off",
+              type: "radio",
+              name: "donationType",
+              value: "one-off"
+            },
+            domProps: { checked: _vm._q(_vm.donationTypePicked, "one-off") },
+            on: {
+              change: function($event) {
+                _vm.donationTypePicked = "one-off"
+              }
+            }
+          }),
+          _vm._v("\n\n      One-off\n    ")
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "label",
+        {
+          staticClass: "btn btn-secondary",
+          class: { active: _vm.donationTypePicked === "recurring" },
+          attrs: { for: "donationType-recurring" }
+        },
+        [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.donationTypePicked,
+                expression: "donationTypePicked"
+              }
+            ],
+            attrs: {
+              id: "donationType-recurring",
+              type: "radio",
+              name: "donationType",
+              value: "recurring"
+            },
+            domProps: { checked: _vm._q(_vm.donationTypePicked, "recurring") },
+            on: {
+              change: function($event) {
+                _vm.donationTypePicked = "recurring"
+              }
+            }
+          }),
+          _vm._v("\n\n      Recurring\n    ")
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm.donationTypePicked == "one-off"
+      ? _c(
+          "div",
+          { staticClass: "container" },
+          [
+            _c("h2", [_vm._v("One-off")]),
+            _vm._v(" "),
+            _vm._l(_vm.donationValuesSingle, function(donationValue) {
+              return _c(
+                "div",
+                {
+                  key: donationValue.value,
+                  staticClass: "btn-group btn-group-toggle"
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.donationAmountSingle,
+                        expression: "donationAmountSingle"
+                      }
+                    ],
+                    staticClass: "form-check-input",
+                    attrs: {
+                      id: "donationAmountSingle-" + donationValue.value,
+                      type: "radio",
+                      name: "donationAmountSingle"
+                    },
+                    domProps: {
+                      value: donationValue.value,
+                      checked: _vm._q(
+                        _vm.donationAmountSingle,
+                        donationValue.value
+                      )
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.donationAmountSingle = donationValue.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-check-label",
+                      attrs: {
+                        for: "donationAmountSingle-" + donationValue.value
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n        £" + _vm._s(donationValue.value) + "\n      "
+                      )
+                    ]
+                  )
+                ]
+              )
+            })
+          ],
+          2
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "donationAmountSingle" } }, [
+        _vm._v("Amount")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.donationAmountSingle,
+            expression: "donationAmountSingle"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { id: "donationAmountValue", type: "number" },
+        domProps: { value: _vm.donationAmountSingle },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.donationAmountSingle = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "fullName" } }, [_vm._v("Full name")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.fullName,
+            expression: "fullName"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { id: "fullName", type: "text" },
+        domProps: { value: _vm.fullName },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.fullName = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "emailAddress" } }, [
+        _vm._v("Email address")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.emailAddress,
+            expression: "emailAddress"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { id: "emailAddress", type: "email" },
+        domProps: { value: _vm.emailAddress },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.emailAddress = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("div", { staticClass: "form-check form-check-inline" }, [
         _c("input", {
@@ -37311,22 +37576,22 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.donationTypePicked,
-              expression: "donationTypePicked"
+              value: _vm.paymentTypePicked,
+              expression: "paymentTypePicked"
             }
           ],
           staticClass: "form-check-input",
           attrs: {
-            id: "donationType-one-off",
+            id: "paymentType-card",
             type: "radio",
-            name: "donationType",
-            value: "one-off",
+            name: "paymentType",
+            value: "card",
             checked: ""
           },
-          domProps: { checked: _vm._q(_vm.donationTypePicked, "one-off") },
+          domProps: { checked: _vm._q(_vm.paymentTypePicked, "card") },
           on: {
             change: function($event) {
-              _vm.donationTypePicked = "one-off"
+              _vm.paymentTypePicked = "card"
             }
           }
         }),
@@ -37335,9 +37600,9 @@ var render = function() {
           "label",
           {
             staticClass: "form-check-label",
-            attrs: { for: "donationType-one-off" }
+            attrs: { for: "paymentType-card" }
           },
-          [_vm._v("\n        One-off\n      ")]
+          [_vm._v("\n        Card\n      ")]
         )
       ]),
       _vm._v(" "),
@@ -37347,21 +37612,21 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.donationTypePicked,
-              expression: "donationTypePicked"
+              value: _vm.paymentTypePicked,
+              expression: "paymentTypePicked"
             }
           ],
           staticClass: "form-check-input",
           attrs: {
-            id: "donationType-recurring",
+            id: "paymentType-paypal",
             type: "radio",
-            name: "donationType",
-            value: "recurring"
+            name: "paymentType",
+            value: "paypal"
           },
-          domProps: { checked: _vm._q(_vm.donationTypePicked, "recurring") },
+          domProps: { checked: _vm._q(_vm.paymentTypePicked, "paypal") },
           on: {
             change: function($event) {
-              _vm.donationTypePicked = "recurring"
+              _vm.paymentTypePicked = "paypal"
             }
           }
         }),
@@ -37370,143 +37635,36 @@ var render = function() {
           "label",
           {
             staticClass: "form-check-label",
-            attrs: { for: "donationType-recurring" }
+            attrs: { for: "paymentType-paypal" }
           },
-          [_vm._v("\n        Recurring\n      ")]
+          [_vm._v("\n        PayPal\n      ")]
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _vm.paymentTypePicked == "card"
+        ? _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "button" },
+                on: { click: _vm.validateForm }
+              },
+              [_vm._v("\n        Give by card\n      ")]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.paymentTypePicked == "paypal"
+        ? _c("div", [
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "button" } },
+              [_vm._v("\n        Give by PayPal\n      ")]
+            )
+          ])
+        : _vm._e()
     ]),
-    _vm._v(" "),
-    _vm.donationTypePicked == "one-off"
-      ? _c("div", { staticClass: "container" }, [
-          _c("h2", [_vm._v("One-off")]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "form-group" },
-            [
-              _vm._l(_vm.donationValues, function(donationValue) {
-                return _c(
-                  "div",
-                  {
-                    key: donationValue.value,
-                    staticClass: "form-check form-check-inline"
-                  },
-                  [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.donationAmount,
-                          expression: "donationAmount"
-                        }
-                      ],
-                      staticClass: "form-check-input",
-                      attrs: {
-                        id: _vm.donationAmount - _vm.$(donationValue.value),
-                        type: "radio",
-                        name: "donationAmount"
-                      },
-                      domProps: {
-                        value: donationValue.value,
-                        checked: _vm._q(_vm.donationAmount, donationValue.value)
-                      },
-                      on: {
-                        change: function($event) {
-                          _vm.donationAmount = donationValue.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "form-check-label",
-                        attrs: {
-                          for: _vm.donationAmount - _vm.$(donationValue.value)
-                        }
-                      },
-                      [_vm._v("\n          £1\n        ")]
-                    )
-                  ]
-                )
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check form-check-inline" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.donationAmount,
-                      expression: "donationAmount"
-                    }
-                  ],
-                  staticClass: "form-check-input",
-                  attrs: {
-                    id: "donationAmount-2",
-                    type: "radio",
-                    name: "donationAmount",
-                    value: "10"
-                  },
-                  domProps: { checked: _vm._q(_vm.donationAmount, "10") },
-                  on: {
-                    change: function($event) {
-                      _vm.donationAmount = "10"
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "donationAmount-2" }
-                  },
-                  [_vm._v("\n          £10\n        ")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-check form-check-inline" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.donationAmount,
-                      expression: "donationAmount"
-                    }
-                  ],
-                  staticClass: "form-check-input",
-                  attrs: {
-                    id: "donationAmount-3",
-                    type: "radio",
-                    name: "donationAmount",
-                    value: "20"
-                  },
-                  domProps: { checked: _vm._q(_vm.donationAmount, "20") },
-                  on: {
-                    change: function($event) {
-                      _vm.donationAmount = "20"
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "form-check-label",
-                    attrs: { for: "donationAmount-3" }
-                  },
-                  [_vm._v("\n          £20\n        ")]
-                )
-              ])
-            ],
-            2
-          )
-        ])
-      : _vm._e(),
     _vm._v(" "),
     _vm.donationTypePicked == "recurring"
       ? _c("div", { staticClass: "container" }, [
@@ -37514,34 +37672,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.donationTypePicked
-      ? _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "donationAmountValue" } }, [
-            _vm._v("Amount")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.donationAmount,
-                expression: "donationAmount"
-              }
-            ],
-            attrs: { id: "donationAmountValue", type: "text" },
-            domProps: { value: _vm.donationAmount },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.donationAmount = $event.target.value
-              }
-            }
-          })
-        ])
-      : _vm._e()
+    _vm.donationTypePicked ? _c("div", { staticClass: "form-group" }) : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -50026,8 +50157,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\luke\local\donationPlatform\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\luke\local\donationPlatform\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\lukeh\local\donation-platform\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\lukeh\local\donation-platform\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
