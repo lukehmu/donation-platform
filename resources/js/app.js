@@ -4,9 +4,13 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Vuelidate from 'vuelidate'
+
 require('./bootstrap')
 
 window.Vue = require('vue')
+
+window.Vue.use(Vuelidate)
 
 /**
  * The following block of code may be used to automatically register your

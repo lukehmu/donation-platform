@@ -15,7 +15,6 @@
           name="donationType"
           value="one-off"
         >
-
         One-off
       </label>
       <label
@@ -30,7 +29,6 @@
           name="donationType"
           value="recurring"
         >
-
         Recurring
       </label>
     </div>
@@ -64,17 +62,23 @@
         <input
           id="donationAmountValue"
           v-model="donationAmountSingle"
+          v-model.trim="$v.donationAmountSingle.$model"
           type="number"
           class="form-control"
+          :class="{ 'is-invalid': $v.donationAmountSingle.$error }"
         >
       </div>
-      <div class="form-group">
+      <div
+        class="form-group"
+      >
         <label for="fullName">Full name</label>
         <input
           id="fullName"
           v-model="fullName"
+          v-model.trim="$v.fullName.$model"
           type="text"
           class="form-control"
+          :class="{ 'is-invalid': $v.fullName.$error }"
         >
       </div>
       <div class="form-group">
@@ -82,8 +86,10 @@
         <input
           id="emailAddress"
           v-model="emailAddress"
+          v-model.trim="$v.emailAddress.$model"
           type="email"
           class="form-control"
+          :class="{ 'is-invalid': $v.emailAddress.$error }"
         >
       </div>
       <div class="btn-group btn-group-toggle">
@@ -108,7 +114,6 @@
           :class="{ active: paymentTypePicked === 'paypal' }"
           for="paymentType-paypal"
         >
-
           <input
             id="paymentType-paypal"
             v-model="paymentTypePicked"
@@ -148,6 +153,10 @@
   </div>
 </template>
 <script>
+import {
+  required, minLength, decimal, minValue, email,
+} from 'vuelidate/lib/validators'
+
 export default {
   name: 'DonationType',
   data() {
@@ -167,6 +176,21 @@ export default {
   },
   methods: {
 
+  },
+  validations: {
+    fullName: {
+      required,
+      minLength: minLength(3),
+    },
+    emailAddress: {
+      required,
+      email,
+    },
+    donationAmountSingle: {
+      required,
+      decimal,
+      minValue: minValue(0),
+    },
   },
 }
 </script>
