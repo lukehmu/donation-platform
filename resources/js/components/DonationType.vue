@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div
-      class="btn-group btn-group-toggle"
+      class="btn-group btn-group-toggle mb-3 col-sm-4"
     >
       <label
-        class="btn btn-secondary"
+        class="btn btn-secondary btn-lg"
         :class="{ active: donationTypePicked === 'one-off' }"
         for="donationType-one-off"
       >
@@ -18,7 +18,7 @@
         One-off
       </label>
       <label
-        class="btn btn-secondary"
+        class="btn btn-secondary btn-lg"
         :class="{ active: donationTypePicked === 'recurring' }"
         for="donationType-recurring"
       >
@@ -37,7 +37,7 @@
         <div>
           <h2>One-off</h2>
           <div
-            class="btn-group btn-group-toggle"
+            class="btn-group btn-group-toggle mb-3 col-sm-5"
           >
             <label
               v-for="donationValue in donationValuesSingle"
@@ -60,20 +60,25 @@
         </div>
         <div class="form-group">
           <label for="donationAmountSingle">Donation amount</label>
-          <input
-            id="donationAmountValue"
-            v-model="donationAmountSingle"
-            v-model.trim="$v.donationAmountSingle.$model"
-            type="number"
-            step="any"
-            class="form-control"
-            :class="{ 'is-invalid': $v.donationAmountSingle.$error }"
-          >
-          <div
-            v-if="errors && errors.donationAmount"
-            class="invalid-feedback"
-          >
-            {{ errors.donationAmount[0] }}
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">£</span>
+            </div>
+            <input
+              id="donationAmountValue"
+              v-model="donationAmountSingle"
+              v-model.trim="$v.donationAmountSingle.$model"
+              type="number"
+              step="0.01"
+              class="form-control col-sm-3"
+              :class="{ 'is-invalid': $v.donationAmountSingle.$error }"
+            >
+            <div
+              v-if="errors && errors.donationAmount"
+              class="invalid-feedback"
+            >
+              {{ errors.donationAmount[0] }}
+            </div>
           </div>
         </div>
         <div
@@ -85,7 +90,7 @@
             v-model="fullName"
             v-model.trim="$v.fullName.$model"
             type="text"
-            class="form-control"
+            class="form-control col-sm-5"
             :class="{ 'is-invalid': $v.fullName.$error }"
           >
           <div
@@ -102,7 +107,7 @@
             v-model="emailAddress"
             v-model.trim="$v.emailAddress.$model"
             type="email"
-            class="form-control"
+            class="form-control col-sm-5"
             :class="{ 'is-invalid': $v.emailAddress.$error }"
           >
           <div
@@ -112,9 +117,9 @@
             {{ errors.emailAddress[0] }}
           </div>
         </div>
-        <div class="btn-group btn-group-toggle">
+        <div class="btn-group btn-group-toggle mb-3 col-sm-4">
           <label
-            class="btn btn-secondary"
+            class="btn btn-secondary btn-lg"
             :class="{ active: paymentTypePicked === 'card' }"
             for="paymentType-card"
           >
@@ -130,7 +135,7 @@
           </label>
 
           <label
-            class="btn btn-secondary"
+            class="btn btn-secondary btn-lg"
             :class="{ active: paymentTypePicked === 'paypal' }"
             for="paymentType-paypal"
           >
@@ -149,7 +154,7 @@
         >
           <button
             type="submit"
-            class="btn btn-primary"
+            class="btn btn-primary btn-lg"
           >
             Give by card
           </button>
@@ -159,7 +164,7 @@
         >
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-primary btn-lg"
           >
             Give by PayPal
           </button>
@@ -170,6 +175,12 @@
         class="alert alert-success mt-3"
       >
         Donation made [do something else]
+      </div>
+      <div
+        v-if="loading"
+        class="alert alert-info mt-3"
+      >
+        Loading
       </div>
     </div>
     <div
@@ -208,11 +219,13 @@ export default {
       errors: {},
       success: false,
       fullError: '',
+      loading: false,
     }
   },
   methods: {
     submitSingleDonation() {
       this.success = false
+      this.loading = true
       this.errors = []
       window.axios.post(this.route, {
         donationAmount: this.donationAmountSingle,
@@ -223,11 +236,13 @@ export default {
       })
         .then((response) => {
           this.success = true
+          this.loading = false
           console.log(response)
         })
         .catch((error) => {
           this.success = false
-          this.fullError = error
+          this.loading = false
+          this.fullError = error.response
           if (error.response.status === 422) {
             this.errors = error.response.data.errors || {}
           }
@@ -254,5 +269,13 @@ export default {
 <style scoped>
 .invalid-feedback {
   display: block;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
 }
 </style>
