@@ -172,17 +172,17 @@
           </button>
         </div>
       </form>
-      <div
+      <!-- <div
         v-if="success"
         class="alert alert-success mt-3"
       >
         Donation made [do something else]
-      </div>
+      </div> -->
       <div
         v-if="loading"
         class="alert alert-info mt-3"
       >
-        Loading
+        [LOADING] Pretending the API is slow
       </div>
     </div>
     <div
@@ -236,6 +236,7 @@ export default {
         fullName: this.fullName,
         paymentType: this.paymentTypePicked,
       })
+        .then((response) => new Promise((resolve) => setTimeout(() => resolve(response), 2000)))
         .then((response) => {
           this.success = true
           this.loading = false
