@@ -15,7 +15,8 @@
         <a class="navbar-brand" href="/">Laravel Vue Donation</a>
     </nav>
     <div id="app">
-        <donation-type route={{ route('donations.store') }}></donation-type>
+        {{-- <donation-type route={{ route('donations.store') }}></donation-type> --}}
+        <app route={{ route('donations.store') }}></app>
     </div>
     <script src="{{ mix('js/app.js') }}"></script>
 </body>

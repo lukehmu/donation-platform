@@ -207,7 +207,6 @@ export default {
   },
   data() {
     return {
-      fields: {},
       donationTypePicked: 'one-off',
       donationAmountSingle: '1',
       donationValuesSingle: [
@@ -222,6 +221,7 @@ export default {
       success: false,
       fullError: '',
       loading: false,
+      donationID: null,
     }
   },
   methods: {
@@ -239,6 +239,8 @@ export default {
         .then((response) => {
           this.success = true
           this.loading = false
+          this.donationID = response.data.id
+          this.$router.push({ name: 'giftaid', params: { donationID: this.donationID } })
           console.log(response)
         })
         .catch((error) => {

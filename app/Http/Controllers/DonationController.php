@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Donation;
 use App\Http\Requests\DonationRequest;
-use Illuminate\Http\Request;
-use App\Repositories\DonationRepositoryInterface;
+use App\Repositories\Interfaces\DonationRepositoryInterface;
 
 class DonationController extends Controller
 {
@@ -32,7 +31,7 @@ class DonationController extends Controller
         $data = [
             'donations' => $this->donation->all()
         ];
-        dd($data);
+        dd($data['donations']);
     }
 
     /**
@@ -44,6 +43,7 @@ class DonationController extends Controller
     public function store(DonationRequest $request)
     {
         // leaving this more verbose version in for learning
+
         // $validated = $request->validated();
         // $donation = new Donation([
         //     'donationType' => $request->get('donationType'),
@@ -53,7 +53,12 @@ class DonationController extends Controller
         //     'donationAmount' => $request->get('donationAmount'),
         // ]);
         // $donation->save();
-        $donation = Donation::create($request->validated());
+
+        // Move validation to model
+        // $donation = Donation::create($request->validated());
+
+        // repository handles storing the new donation
+        return $this->donation->create($request);
     }
 
     /**
@@ -64,19 +69,22 @@ class DonationController extends Controller
      */
     public function show(Donation $donation)
     {
-        //
+        $data = [
+            'donation' => $this->donation->get($donation)
+        ];
+        dd($data['donation']);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\DonationRequest  $request
      * @param  \App\Donation  $donation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Donation $donation)
+    public function update(DonationRequest $request, $id)
     {
-        //
+        return $this->donation->update($request, $id);
     }
 
     /**

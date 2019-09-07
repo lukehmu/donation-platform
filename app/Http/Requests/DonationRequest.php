@@ -6,6 +6,19 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class DonationRequest extends FormRequest
 {
+
+    protected $postRules = [
+        'donationType' => 'required|string',
+        'emailAddress' => 'required|email',
+        'fullName' => 'required|string',
+        'paymentType' => 'required|string',
+        'donationAmount' => 'required|numeric',
+
+    ];
+    protected $patchRules = [
+        'giftaid' => 'boolean',
+    ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -16,6 +29,7 @@ class DonationRequest extends FormRequest
         return true;
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -23,13 +37,12 @@ class DonationRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'donationType' => 'required|string',
-            'emailAddress' => 'required|email',
-            'fullName' => 'required|string',
-            'paymentType' => 'required|string',
-            'donationAmount' => 'required|numeric',
-        ];
+        if ($this->isMethod('POST')) {
+            return $this->postRules;
+        }
+        if ($this->isMethod('PATCH')) {
+            return $this->patchRules;
+        }
     }
 
     /**

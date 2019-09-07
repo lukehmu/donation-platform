@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Donation;
+use App\Http\Requests\DonationRequest;
+use App\Repositories\Interfaces\DonationRepositoryInterface;
 
 class DonationRepository implements DonationRepositoryInterface
 {
@@ -10,17 +12,28 @@ class DonationRepository implements DonationRepositoryInterface
      * Get's a donation by it's ID
      *
      * @param int
-     * @return collection
+     * @return model
      */
-    public function get($donation_id)
+    public function get(Donation $donation)
     {
-        return Donation::find($donation_id);
+        return Donation::findOrFail($donation);
+    }
+
+    /**
+     * Create a new donation
+     *
+     * @param Donation
+     * @return model
+     */
+    public function create(DonationRequest $request)
+    {
+        return Donation::create($request->validated());
     }
 
     /**
      * Get's all donations.
      *
-     * @return mixed
+     * @return collection
      */
     public function all()
     {
@@ -30,21 +43,22 @@ class DonationRepository implements DonationRepositoryInterface
     /**
      * Deletes a donation.
      *
-     * @param int
+     * @param Donation
      */
-    public function delete($donation_id)
+    public function delete(Donation $donation)
     {
-        Donation::destroy($donation_id);
+        Donation::destroy($donation);
     }
 
     /**
      * Updates a donation.
      *
-     * @param int
-     * @param array
+     * @param Donation
+     * @param DonationRequest
      */
-    public function update($donation_id, array $post_data)
+    public function update(DonationRequest $request, $id)
     {
-        Donation::find($donation_id)->update($post_data);
+        // dd(Donation::findOrFail($id));
+        Donation::findOrFail($id)->update($request->validated());
     }
 }

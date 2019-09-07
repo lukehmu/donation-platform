@@ -11,6 +11,7 @@ class Donation extends Model
         'emailAddress',
         'fullName',
         'paymentType',
-        'donationAmount'
+        'donationAmount',
+        'giftaid'
     ];
 }
