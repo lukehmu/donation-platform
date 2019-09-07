@@ -119,6 +119,7 @@
         </div>
         <div class="btn-group btn-group-toggle mb-3 col-sm-4">
           <label
+            id="label-paymentType-card"
             class="btn btn-secondary btn-lg"
             :class="{ active: paymentTypePicked === 'card' }"
             for="paymentType-card"
@@ -153,6 +154,7 @@
           v-if="paymentTypePicked == 'card'"
         >
           <button
+            id="button-payment-card"
             type="submit"
             class="btn btn-primary btn-lg"
           >
