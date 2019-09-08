@@ -13,7 +13,12 @@ require('./bootstrap')
 window.Vue = require('vue')
 
 window.Vue.use(Vuelidate)
-// window.Vue.use(VueRouter)
+
+const booleanFilter = function bool(value, trueText, falseText) {
+  return value ? trueText || 'Yes' : falseText || 'No'
+}
+
+window.Vue.filter('boolean', booleanFilter)
 
 /**
  * The following block of code may be used to automatically register your

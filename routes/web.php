@@ -15,14 +15,20 @@ Route::get('/', function () {
     return view('donate');
 });
 
+Route::resource('donations', 'DonationController');
+
 Route::get('/{any}', function () {
     return view('donate');
 });
 
+// Route::get('/admin/', function () {
+//     return view('admin');
+// });
+
 Route::get('/admin/{any}', function () {
-    return view('admin');
+    return view('admin.index');
 });
 
-Auth::routes();
 
-Route::resource('donations', 'DonationController');
+
+Auth::routes();

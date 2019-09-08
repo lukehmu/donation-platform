@@ -28,10 +28,11 @@ class DonationController extends Controller
     public function index()
     {
         // learning about how repositories work
-        $data = [
-            'donations' => $this->donation->all()
-        ];
-        dd($data['donations']);
+        // $data = [
+        //     'donations' => $this->donation->all()
+        // ];
+        // dd($data['donations']);
+        return $this->donation->all();
     }
 
     /**
@@ -67,12 +68,9 @@ class DonationController extends Controller
      * @param  \App\Donation  $donation
      * @return \Illuminate\Http\Response
      */
-    public function show(Donation $donation)
+    public function show($id)
     {
-        $data = [
-            'donation' => $this->donation->get($donation)
-        ];
-        dd($data['donation']);
+        return $this->donation->get($id);
     }
 
     /**
@@ -90,11 +88,11 @@ class DonationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Donation  $donation
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Donation $donation)
+    public function destroy($id)
     {
-        //
+        return $this->donation->delete($id);
     }
 }

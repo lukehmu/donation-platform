@@ -14,9 +14,9 @@ class DonationRepository implements DonationRepositoryInterface
      * @param int
      * @return model
      */
-    public function get(Donation $donation)
+    public function get($id)
     {
-        return Donation::findOrFail($donation);
+        return Donation::findOrFail($id);
     }
 
     /**
@@ -45,9 +45,9 @@ class DonationRepository implements DonationRepositoryInterface
      *
      * @param Donation
      */
-    public function delete(Donation $donation)
+    public function delete($id)
     {
-        Donation::destroy($donation);
+        Donation::destroy($id);
     }
 
     /**

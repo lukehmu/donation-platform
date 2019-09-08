@@ -13,7 +13,7 @@ interface DonationRepositoryInterface
      *
      * @param Donation
      */
-    public function get(Donation $donation);
+    public function get($id);
 
     /**
      * Create a new donation
@@ -34,7 +34,7 @@ interface DonationRepositoryInterface
      *
      * @param int
      */
-    public function delete(Donation $donation);
+    public function delete($id);
 
     /**
      * Updates a donation.
