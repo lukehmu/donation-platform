@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    Cheers for everything
+    <p v-if="donation">
+      Cheers for everything <strong>{{ donation.fullName }} </strong>
+    </p>
   </div>
 </template>
 <script>
@@ -9,6 +11,10 @@ export default {
     donationID: {
       default: null,
       type: Number,
+    },
+    donation: {
+      default: null,
+      type: Object,
     },
   },
 }

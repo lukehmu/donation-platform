@@ -5,12 +5,12 @@
     >
       <label
         class="btn btn-secondary btn-lg"
-        :class="{ active: donationTypePicked === 'one-off' }"
+        :class="{ active: formFields.donationType === 'one-off' }"
         for="donationType-one-off"
       >
         <input
           id="donationType-one-off"
-          v-model="donationTypePicked"
+          v-model="formFields.donationType"
           type="radio"
           name="donationType"
           value="one-off"
@@ -19,12 +19,12 @@
       </label>
       <label
         class="btn btn-secondary btn-lg"
-        :class="{ active: donationTypePicked === 'recurring' }"
+        :class="{ active: formFields.donationType === 'recurring' }"
         for="donationType-recurring"
       >
         <input
           id="donationType-recurring"
-          v-model="donationTypePicked"
+          v-model="formFields.donationType"
           type="radio"
           name="donationType"
           value="recurring"
@@ -32,8 +32,8 @@
         Recurring
       </label>
     </div>
-    <div v-if="donationTypePicked == 'one-off'">
-      <form @submit.prevent="submitSingleDonation">
+    <div v-if="formFields.donationType == 'one-off'">
+      <form @submit.prevent>
         <div>
           <h2>One-off</h2>
           <div
@@ -43,14 +43,14 @@
               v-for="donationValue in donationValuesSingle"
               :key="donationValue.value"
               class="btn btn-info"
-              :for="'donationAmountSingle-' + donationValue.value"
-              :class="{ active: donationValue.value === donationAmountSingle }"
+              :for="'donationAmount-' + donationValue.value"
+              :class="{ active: donationValue.value === formFields.donationAmount }"
             >
               <input
-                :id="'donationAmountSingle-' + donationValue.value"
-                v-model="donationAmountSingle"
+                :id="'donationAmount-' + donationValue.value"
+                v-model="formFields.donationAmount"
                 type="radio"
-                name="donationAmountSingle"
+                name="donationAmount"
                 :value="donationValue.value"
               >
 
@@ -59,19 +59,19 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="donationAmountSingle">Donation amount</label>
+          <label for="donationAmount">Donation amount</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <span class="input-group-text">£</span>
             </div>
             <input
               id="donationAmountValue"
-              v-model="donationAmountSingle"
-              v-model.trim="$v.donationAmountSingle.$model"
+              v-model="formFields.donationAmount"
+              v-model.trim="$v.formFields.donationAmount.$model"
               type="number"
               step="0.01"
               class="form-control col-sm-3"
-              :class="{ 'is-invalid': $v.donationAmountSingle.$error }"
+              :class="{ 'is-invalid': $v.formFields.donationAmount.$error }"
             >
             <div
               v-if="errors && errors.donationAmount"
@@ -87,11 +87,11 @@
           <label for="fullName">Full name</label>
           <input
             id="fullName"
-            v-model="fullName"
-            v-model.trim="$v.fullName.$model"
+            v-model="formFields.fullName"
+            v-model.trim="$v.formFields.fullName.$model"
             type="text"
             class="form-control col-sm-5"
-            :class="{ 'is-invalid': $v.fullName.$error }"
+            :class="{ 'is-invalid': $v.formFields.fullName.$error }"
           >
           <div
             v-if="errors && errors.fullName"
@@ -104,11 +104,11 @@
           <label for="emailAddress">Email address</label>
           <input
             id="emailAddress"
-            v-model="emailAddress"
-            v-model.trim="$v.emailAddress.$model"
+            v-model="formFields.emailAddress"
+            v-model.trim="$v.formFields.emailAddress.$model"
             type="email"
             class="form-control col-sm-5"
-            :class="{ 'is-invalid': $v.emailAddress.$error }"
+            :class="{ 'is-invalid': $v.formFields.emailAddress.$error }"
           >
           <div
             v-if="errors && errors.emailAddress"
@@ -121,12 +121,12 @@
           <label
             id="label-paymentType-card"
             class="btn btn-secondary btn-lg"
-            :class="{ active: paymentTypePicked === 'card' }"
+            :class="{ active: formFields.paymentType === 'card' }"
             for="paymentType-card"
           >
             <input
               id="paymentType-card"
-              v-model="paymentTypePicked"
+              v-model="formFields.paymentType"
               type="radio"
               name="paymentType"
               value="card"
@@ -137,12 +137,12 @@
 
           <label
             class="btn btn-secondary btn-lg"
-            :class="{ active: paymentTypePicked === 'paypal' }"
+            :class="{ active: formFields.paymentType === 'paypal' }"
             for="paymentType-paypal"
           >
             <input
               id="paymentType-paypal"
-              v-model="paymentTypePicked"
+              v-model="formFields.paymentType"
               type="radio"
               name="paymentType"
               value="paypal"
@@ -151,22 +151,24 @@
           </label>
         </div>
         <div
-          v-if="paymentTypePicked == 'card'"
+          v-if="formFields.paymentType == 'card'"
         >
           <button
             id="button-payment-card"
             type="submit"
             class="btn btn-primary btn-lg"
+            @click="createDonation"
           >
             Give by card
           </button>
         </div>
         <div
-          v-if="paymentTypePicked == 'paypal'"
+          v-if="formFields.paymentType == 'paypal'"
         >
           <button
             type="button"
             class="btn btn-primary btn-lg"
+            @click="createDonation"
           >
             Give by PayPal
           </button>
@@ -186,7 +188,7 @@
       </div>
     </div>
     <div
-      v-if="donationTypePicked == 'recurring'"
+      v-if="formFields.donationType == 'recurring'"
     >
       <h2>Recurring</h2>
     </div>
@@ -196,6 +198,7 @@
 import {
   required, minLength, decimal, minValue, email,
 } from 'vuelidate/lib/validators'
+import DonationAPI from '../services/api/Donations'
 
 export default {
   name: 'DonationType',
@@ -207,17 +210,19 @@ export default {
   },
   data() {
     return {
-      donationTypePicked: 'one-off',
-      donationAmountSingle: '1',
+      formFields: {
+        donationType: 'one-off',
+        donationAmount: '1',
+        emailAddress: '',
+        fullName: '',
+        paymentType: '',
+      },
       donationValuesSingle: [
         { value: 1 },
         { value: 2 },
         { value: 10 },
       ],
-      emailAddress: null,
-      fullName: null,
-      paymentTypePicked: '',
-      errors: {},
+      errors: [],
       success: false,
       fullError: '',
       loading: false,
@@ -225,27 +230,21 @@ export default {
     }
   },
   methods: {
-    submitSingleDonation() {
+    createDonation() {
       this.success = false
       this.loading = true
       this.errors = []
-      window.axios.post(this.route, {
-        donationAmount: this.donationAmountSingle,
-        donationType: this.donationTypePicked,
-        emailAddress: this.emailAddress,
-        fullName: this.fullName,
-        paymentType: this.paymentTypePicked,
-      })
-        .then((response) => new Promise((resolve) => setTimeout(() => resolve(response), 2000)))
-        .then((response) => {
+      // formFields is converted to FormData in the DonationAPI
+      DonationAPI.createDonation(this.formFields)
+        .then((id) => {
+          console.log('Successfully created donation')
+          this.donationID = id
           this.success = true
           this.loading = false
-          this.donationID = response.data.id
-          this.$router.push({ name: 'giftaid', params: { donationID: this.donationID } })
-          console.log(response)
+          this.$router.push({ name: 'giftaid', params: { donationID: this.donationID, donation: this.formFields } })
         })
         .catch((error) => {
-          this.success = false
+          console.log(error)
           this.loading = false
           this.fullError = error.response
           if (error.response.status === 422) {
@@ -255,18 +254,20 @@ export default {
     },
   },
   validations: {
-    fullName: {
-      required,
-      minLength: minLength(3),
-    },
-    emailAddress: {
-      required,
-      email,
-    },
-    donationAmountSingle: {
-      required,
-      decimal,
-      minValue: minValue(0),
+    formFields: {
+      fullName: {
+        required,
+        minLength: minLength(3),
+      },
+      emailAddress: {
+        required,
+        email,
+      },
+      donationAmount: {
+        required,
+        decimal,
+        minValue: minValue(0),
+      },
     },
   },
 }

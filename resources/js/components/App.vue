@@ -1,5 +1,5 @@
 <template>
-  <router-view :route="route"></router-view>
+  <router-view></router-view>
 </template>
 <script>
 export default {

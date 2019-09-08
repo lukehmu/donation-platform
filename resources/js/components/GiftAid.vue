@@ -1,22 +1,61 @@
 <template>
   <div class="container">
+    <div
+      class="btn-group btn-group-toggle mb-3 col-sm-4"
+    >
+      <label
+        class="btn btn-secondary btn-lg"
+        :class="{ active: formFields.giftaid === '1' }"
+        for="giftaid-yes"
+      >
+        <input
+          id="giftaid-yes"
+          v-model="formFields.giftaid"
+          type="radio"
+          name="giftaid"
+          value="1"
+        >
+        Yes
+      </label>
+      <label
+        class="btn btn-secondary btn-lg"
+        :class="{ active: formFields.giftaid === '0' }"
+        for="giftaid-no"
+      >
+        <input
+          id="giftaid-no"
+          v-model="formFields.giftaid"
+          type="radio"
+          name="giftaid"
+          value="0"
+        >
+        No
+      </label>
+    </div>
     <p>Thanks for the moneyz</p>
     <button
       id="button-thanks"
       tag="button"
       class="btn btn-primary btn-lg"
-      @click="updateSingleDonation"
+      @click="updateDonation"
     >
       Give Gift Aid
     </button>
   </div>
 </template>
 <script>
+import DonationAPI from '../services/api/Donations'
+
 export default {
+  name: 'Giftaid',
   props: {
     donationID: {
       default: null,
       type: Number,
+    },
+    donation: {
+      default: null,
+      type: Object,
     },
   },
   data() {
@@ -25,22 +64,22 @@ export default {
       fullError: '',
       loading: false,
       errors: [],
+      formFields: {
+        giftaid: '1',
+      },
     }
   },
   methods: {
-    updateSingleDonation() {
-      console.log('updateSingleDonation')
+    updateDonation() {
       this.success = false
       this.loading = true
       this.errors = []
-      window.axios.patch(`/donations/${this.donationID}`, {
-        giftaid: 1,
-      })
+      DonationAPI.updateDonation(this.donationID, { giftaid: this.formFields.giftaid })
         .then((response) => {
           this.success = true
           this.loading = false
-          this.$router.push({ name: 'thankyou', params: { donationID: this.donationID } })
           console.log(response)
+          this.$router.push({ name: 'thankyou', params: { donationID: this.donationID, donation: this.donation } })
         })
         .catch((error) => {
           this.success = false

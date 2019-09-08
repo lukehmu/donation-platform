@@ -19,6 +19,10 @@ Route::get('/{any}', function () {
     return view('donate');
 });
 
+Route::get('/admin/{any}', function () {
+    return view('admin');
+});
+
 Auth::routes();
 
 Route::resource('donations', 'DonationController');

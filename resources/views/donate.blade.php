@@ -16,7 +16,7 @@
     </nav>
     <div id="app">
         {{-- <donation-type route={{ route('donations.store') }}></donation-type> --}}
-        <app route={{ route('donations.store') }}></app>
+        <app></app>
     </div>
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
