@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Donation;
+use App\Jobs\SyncDonations;
 use App\Http\Requests\DonationRequest;
 use App\Repositories\Interfaces\DonationRepositoryInterface;
 
@@ -27,7 +28,9 @@ class DonationRepository implements DonationRepositoryInterface
      */
     public function create(DonationRequest $request)
     {
-        return Donation::create($request->validated());
+        $donation = Donation::create($request->validated());
+        SyncDonations::dispatch($donation);
+        return $donation;
     }
 
     /**
