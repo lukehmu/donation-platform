@@ -24,6 +24,9 @@ class DonationTest extends DuskTestCase
             $browser->whenAvailable('#button-payment-card', function ($button) {
                 $button->press('#button-payment-card');
             });
+            // this doesn't seem to be able to handle vue router...
+            // $browser->waitUntilVueIsNot('donationID', null, '@Giftaid');
+            // $browser->assertVueIsNot('donationID', null, '@routerView');
         });
     }
 }

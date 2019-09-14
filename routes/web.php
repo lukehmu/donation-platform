@@ -19,7 +19,7 @@ Route::resource('donations', 'DonationController');
 
 Route::get('/{any}', function () {
     return view('donate');
-});
+})->name('donate');
 
 // Route::get('/admin/', function () {
 //     return view('admin');
@@ -27,7 +27,7 @@ Route::get('/{any}', function () {
 
 Route::get('/admin/{any}', function () {
     return view('admin.index');
-});
+})->name('admin');
 
 
 
