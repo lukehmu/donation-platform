@@ -19,6 +19,7 @@ const booleanFilter = function bool(value, trueText, falseText) {
 }
 
 window.Vue.filter('boolean', booleanFilter)
+window.Vue.config.devtools = true
 
 /**
  * The following block of code may be used to automatically register your
