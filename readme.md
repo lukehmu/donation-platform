@@ -1,3 +1,5 @@
+![](https://github.com/lukehmu/donation-platform/workflows/CI/badge.svg)
+
 ## Experimenting with Laravel & Vue
 ### To do
 * Update this readme
