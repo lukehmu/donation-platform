@@ -18,7 +18,7 @@ jobs:
       - name: Composer Action
         uses: MilesChou/composer-action@master
         with:
-          args: "install"
+          args: "install --no-dev"
       - name: npm install, prod, and test
         run: |
           npm install
