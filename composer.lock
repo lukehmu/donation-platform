@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ab9c369bed36769d066521f518bab9c8",
+    "content-hash": "cb02f9573b738a22531f7e7c9e4ad1b6",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -4419,34 +4419,34 @@
         },
         {
             "name": "laravel/dusk",
-            "version": "v5.11.0",
+            "version": "v6.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/dusk.git",
-                "reference": "e07cc46a1e39767739e8197189780b4c2639806d"
+                "reference": "a004d4cc3f1fbaa92f372cbe3e9ced5387a60383"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/dusk/zipball/e07cc46a1e39767739e8197189780b4c2639806d",
-                "reference": "e07cc46a1e39767739e8197189780b4c2639806d",
+                "url": "https://api.github.com/repos/laravel/dusk/zipball/a004d4cc3f1fbaa92f372cbe3e9ced5387a60383",
+                "reference": "a004d4cc3f1fbaa92f372cbe3e9ced5387a60383",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-zip": "*",
-                "illuminate/console": "~5.7.0|~5.8.0|^6.0|^7.0",
-                "illuminate/support": "~5.7.0|~5.8.0|^6.0|^7.0",
-                "nesbot/carbon": "^1.20|^2.0",
-                "php": ">=7.1.0",
+                "illuminate/console": "^6.0|^7.0|^8.0",
+                "illuminate/support": "^6.0|^7.0|^8.0",
+                "nesbot/carbon": "^2.0",
+                "php": "^7.2",
                 "php-webdriver/webdriver": "^1.8.1",
-                "symfony/console": "^4.0|^5.0",
-                "symfony/finder": "^4.0|^5.0",
-                "symfony/process": "^4.0|^5.0",
-                "vlucas/phpdotenv": "^2.2|^3.0|^4.0"
+                "symfony/console": "^4.3|^5.0",
+                "symfony/finder": "^4.3|^5.0",
+                "symfony/process": "^4.3|^5.0",
+                "vlucas/phpdotenv": "^3.0|^4.0"
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^7.5|^8.0"
+                "phpunit/phpunit": "^7.5.15|^8.4|^9.0"
             },
             "suggest": {
                 "ext-pcntl": "Used to gracefully terminate Dusk when tests are running."
@@ -4454,7 +4454,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0-dev"
+                    "dev-master": "6.x-dev"
                 },
                 "laravel": {
                     "providers": [
@@ -4483,7 +4483,7 @@
                 "testing",
                 "webdriver"
             ],
-            "time": "2020-03-24T16:21:49+00:00"
+            "time": "2020-08-25T17:30:13+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -5294,6 +5294,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {

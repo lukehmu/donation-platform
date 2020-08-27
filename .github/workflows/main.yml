@@ -48,5 +48,7 @@ jobs:
         run: php artisan key:generate
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         run: |
+          php artisan dusk:chrome-driver
           php artisan migrate
-          vendor/bin/phpunit
+          php artisan serve
+          php artisan dusk
