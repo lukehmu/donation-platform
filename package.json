@@ -10,26 +10,26 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "axios": "^0.19.1",
-        "bootstrap": "^4.4.1",
+        "axios": "^0.19.2",
+        "bootstrap": "^4.5.2",
         "cross-env": "^5.1",
         "eslint": "^6.8.0",
-        "eslint-config-airbnb-base": "^14.0.0",
-        "eslint-plugin-import": "^2.20.0",
+        "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-plugin-import": "^2.22.0",
         "jquery": "^3.5.1",
-        "laravel-mix": "^4.1.4",
-        "lodash": "^4.17.19",
-        "popper.js": "^1.16.0",
+        "laravel-mix": "^5.0.5",
+        "lodash": "^4.17.20",
+        "popper.js": "^1.16.1",
         "resolve-url-loader": "2.3.1",
-        "sass": "^1.25.0",
+        "sass": "^1.26.10",
         "sass-loader": "7.*",
-        "vue": "^2.6.11",
-        "vue-template-compiler": "^2.6.11"
+        "vue": "^2.6.12",
+        "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
-        "babel-eslint": "^10.0.3",
-        "eslint-plugin-vue": "^5.2.3",
-        "vue-router": "^3.1.5",
+        "babel-eslint": "^10.1.0",
+        "eslint-plugin-vue": "^6.2.2",
+        "vue-router": "^3.4.3",
         "vuelidate": "^0.7.5"
     }
 }
