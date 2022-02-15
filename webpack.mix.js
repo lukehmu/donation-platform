@@ -1,5 +1,4 @@
-const mix = require('laravel-mix')
-// const webpack = require('./webpack.config')
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,11 +11,6 @@ const mix = require('laravel-mix')
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').vue()
-  .sass('resources/sass/app.scss', 'public/css')
-  .sourceMaps()
-if (!mix.inProduction()) {
-  mix
-    .webpackConfig({ devtool: 'inline-source-map' })
-}
-// .webpackConfig(Object.assign(webpack))
+mix.js('resources/js/app.js', 'public/js')
+    .vue()
+    .sass('resources/sass/app.scss', 'public/css');

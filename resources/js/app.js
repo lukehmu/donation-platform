@@ -3,14 +3,12 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
 import Vuelidate from 'vuelidate'
-// import VueRouter from 'vue-router'
 import router from './router'
 
 require('./bootstrap')
 
-window.Vue = require('vue')
+window.Vue = require('vue').default
 
 window.Vue.use(Vuelidate)
 
@@ -19,9 +17,7 @@ const booleanFilter = function bool(value, trueText, falseText) {
 }
 
 window.Vue.filter('boolean', booleanFilter)
-window.Vue.config.devtools = true
-
-/**
+window.Vue.config.devtools = true/**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
@@ -32,7 +28,7 @@ window.Vue.config.devtools = true
 const files = require.context('./', true, /\.vue$/i)
 files.keys().map((key) => Vue.component(key.split('/').pop().split('.')[0], files(key).default)) // eslint-disable-line
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
